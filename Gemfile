@@ -41,3 +41,11 @@ group :development, :test do
 end
 
 
+
+gem "rack-cache", "~> 1.17"
+
+gem "ializer", "~> 0.14.0"
+
+gem "devise", "~> 4.9"
+
+gem "jsonapi-serializer", "~> 2.2"
