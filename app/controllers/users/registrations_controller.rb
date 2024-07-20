@@ -12,16 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     result = Users::Create.call(params: sign_up_params, context: { session: session })
-
-    if result.data[:resource]&.persisted?
-      if result.data[:resource].active_for_authentication?
-        sign_up(resource_name, result.data[:resource])
-      else
-        expire_data_after_sign_in!
-      end
-    end
-
-    render json: result.data[:response], status: result.status
+    render json: result.response, status: result.status
   end
 
   def update

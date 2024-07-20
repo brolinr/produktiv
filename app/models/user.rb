@@ -5,8 +5,25 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, :name, presence: true
-  validates :username, uniqueness: true
+  validates :username, uniqueness: { case_insensitive: true }
   validate :password_confirmation_presence
+
+  has_many :access_grants,
+    class_name: "Doorkeeper::AccessGrant",
+    foreign_key: :resource_owner_id,
+    dependent: :delete_all # or :destroy if you need callbacks
+
+  has_many :access_tokens,
+    class_name: "Doorkeeper::AccessToken",
+    foreign_key: :resource_owner_id,
+    dependent: :delete_all # or :destroy if you need callbacks
+
+  has_many :project_users,
+    class_name: "::ProjectUser",
+    foreign_key: :user_id,
+    dependent: :destroy
+
+  has_many :projects, dependent: :destroy
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)

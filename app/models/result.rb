@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Result
-  attr_reader :errors, :data, :status
+  attr_reader :errors, :data, :status, :response
 
   def self.failure(*errors, status: :unprocessable_entity)
     new(errors: errors, status: status)
@@ -11,10 +11,11 @@ class Result
     new(data: data, status: status)
   end
 
-  def initialize(errors: [], data: nil, status: nil)
+  def initialize(errors: [], data: nil, status: nil, response: nil)
     @errors = Array(errors)
     @data = data
     @status = status
+    @response = response
   end
 
   def assign_data(object)
@@ -44,5 +45,9 @@ class Result
 
   def error_string
     errors.compact.join(" ")
+  end
+
+  def assign_response(info)
+    @response = info
   end
 end

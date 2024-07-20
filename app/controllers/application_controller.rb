@@ -15,14 +15,6 @@ class ApplicationController < ActionController::API
   # end
   #
 
-  def render_404
-    render json: { error: "Record not found" }, status: :not_found
-  end
-
-  def render_unauthorized
-    render json: { error: "Unauthorized" }, status: :unauthorized
-  end
-
 
   protected
   def configure_permitted_parameters

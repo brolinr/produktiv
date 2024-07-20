@@ -14,6 +14,7 @@ class ApplicationService
   end
 
   delegate :assign_data, to: :result
+  delegate :assign_response, to: :result
   delegate :add_error, to: :result
   delegate :success?, to: :result
   delegate :failure?, to: :result
@@ -65,6 +66,7 @@ class ApplicationService
     yield
     if model_object&.changed? && model_object.present? && !model_object.valid?
       add_error(model_object.errors.full_messages)
+      assign_data({ error: result.errors })
     end
   rescue StandardError => e
     add_error(e.message)

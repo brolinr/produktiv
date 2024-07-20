@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -25,4 +26,13 @@ Rails.application.routes.draw do
       registration: "register",
       sign_up: "sign_up" }
   )
+  scope :v1 do
+    use_doorkeeper
+  end
+
+  namespace :v1 do
+    resources :projects, only: %i[index show update destroy create] do
+      resources :invites, only: %i[index show update destroy create], shallow: true
+    end
+  end
 end

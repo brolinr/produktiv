@@ -17,11 +17,15 @@ class Users::Update < ApplicationService
     return add_error("Login to update account") if user.nil?
 
     if user.update(params)
-      assign_data({ response: { user: UserSerializer.new(user).serializable_hash }, resource: user })
+      assign_response(UserSerializer.new(user).serializable_hash)
+      assign_data(user)
     else
-      assign_data({ response: { error: user.errors.full_messages }, status: :unprocessable_entity })
+      add_errors(user.errors.full_messages)
+      assign_response({ error: result.errors })
+      assign_data(user)
     end
   rescue StandardError => e
-    assign_data({ response: { error: e.message }, status: :unprocessable_entity })
+    add_errors(e)
+    assign_response({ error: result.errors })
   end
 end

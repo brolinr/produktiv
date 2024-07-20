@@ -13,22 +13,21 @@ class Users::Create < ApplicationService
     resource.save
     if resource.persisted?
       if resource.active_for_authentication?
-        assign_data({ response: { user: UserSerializer.new(resource).serializable_hash }, resource: resource })
+        assign_data(resource)
+        assign_response({ user: UserSerializer.new(resource).serializable_hash })
       else
-        assign_data(
-          {
-            response: {
-              user: UserSerializer.new(resource).serializable_hash,
-              notice: I18n.t("devise.registrations.signed_up_but_#{resource.inactive_message}")
-            },
-            resource: resource
-          }
+        assign_data(resource)
+        assign_response(
+          user: UserSerializer.new(resource).serializable_hash,
+          notice: I18n.t("devise.registrations.signed_up_but_#{resource.inactive_message}")
         )
       end
     else
-      assign_data({ response: { error: resource.errors.full_messages }, status: :unprocessable_entity })
+      add_errors(resource.errors.full_messages)
+      assign_response({ error: result.errors })
     end
   rescue StandardError => e
-    assign_data({ response: { error: e.message }, status: :unprocessable_entity })
+    add_errors(e.message)
+    assign_response({ error: result.errors })
   end
 end
