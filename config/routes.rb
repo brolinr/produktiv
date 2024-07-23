@@ -32,6 +32,10 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :projects, only: %i[index show update destroy create] do
+      resources :message_board, only: %i[index]
+      resources :messages, only: %i[index show update destroy create]
+      patch "message_board", to: "message_board#update"
+      put "message_board", to: "message_board#update"
       resources :invites, only: %i[index show update destroy create], shallow: true
     end
   end

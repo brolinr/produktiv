@@ -14,7 +14,7 @@ class Users::Update < ApplicationService
   end
 
   def update_user
-    return add_error("Login to update account") if user.nil?
+    return add_error('Login to update account') if user.nil?
 
     if user.update(params)
       assign_response(UserSerializer.new(user).serializable_hash)

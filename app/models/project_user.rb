@@ -5,5 +5,7 @@ class ProjectUser < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  validates :user_id, uniqueness: { scope: :project_id, message: " already added" }
+  has_many :messages, dependent: :destroy
+
+  validates :user_id, uniqueness: { scope: :project_id, message: ' already added' }
 end

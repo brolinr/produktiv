@@ -9,21 +9,22 @@ class User < ApplicationRecord
   validate :password_confirmation_presence
 
   has_many :access_grants,
-    class_name: "Doorkeeper::AccessGrant",
+    class_name: 'Doorkeeper::AccessGrant',
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :access_tokens,
-    class_name: "Doorkeeper::AccessToken",
+    class_name: 'Doorkeeper::AccessToken',
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :project_users,
-    class_name: "::ProjectUser",
+    class_name: '::ProjectUser',
     foreign_key: :user_id,
     dependent: :destroy
 
   has_many :projects, dependent: :destroy
+  has_many :messages, through: :project_user
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
@@ -39,7 +40,7 @@ class User < ApplicationRecord
 
   def unconfirmed_email_update
     if self.respond_to?(:unconfirmed_email) && self.persisted?
-      errors.add(:base, "Confirm your account first!")
+      errors.add(:base, 'Confirm your account first!')
     end
   end
 end

@@ -23,7 +23,7 @@ class Invites::Update < ApplicationService
     end
   rescue StandardError
     assign_data(invite) if invite
-    add_error("Something went wrong")
+    add_error('Something went wrong')
     assign_response({ error: result.errors })
   end
 end

@@ -15,6 +15,7 @@ RSpec.describe User, type: :model do
   describe 'relations' do
     it { is_expected.to have_many(:project_users).dependent(:destroy) }
     it { is_expected.to have_many(:projects).dependent(:destroy) }
+    # it { is_expected.to have_many(:messages).through(:project_user) }
   end
 
   describe 'factories' do

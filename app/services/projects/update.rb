@@ -21,7 +21,7 @@ class Projects::Update < ApplicationService
       assign_response({ error: result.errors })
     end
   rescue StandardError
-    add_error("Something went wrong")
+    add_error('Something went wrong')
     assign_response({ error: result.errors })
   end
 end

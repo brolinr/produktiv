@@ -44,7 +44,7 @@ class Result
   end
 
   def error_string
-    errors.compact.join(" ")
+    errors.compact.join(' ')
   end
 
   def assign_response(info)
