@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe Message, type: :model do
   end
 
   describe 'relations' do
-    it { is_expected.to belong_to(:message_board) }
+    it { is_expected.to belong_to(:room) }
     it { is_expected.to belong_to(:project_user) }
   end
 

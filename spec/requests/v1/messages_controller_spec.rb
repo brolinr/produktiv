@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe V1::MessagesController, type: :request do
@@ -5,8 +7,8 @@ RSpec.describe V1::MessagesController, type: :request do
   let(:project) { create(:project, user: user) }
   let(:headers) { authenticate_with_token(project.user) }
   let(:message_board) { create(:message_board, project: project) }
-  let(:project_user) { create(:project_user, project: project, user: user) }
-  let(:message) { create(:message, message_board: message_board, project_user: project_user) }
+  let(:project_user) { create(:project_user, project: project, user: user, invite_status: 'accepted') }
+  let(:message) { create(:message, room: message_board, project_user: project_user) }
 
   before { user }
   describe "GET #index" do

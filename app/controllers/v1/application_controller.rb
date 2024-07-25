@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class V1::ApplicationController < ApplicationController
   before_action :doorkeeper_authorize!
   respond_to :json
 
   def me
-    respond_with current_resource_owner
+    respond_with(current_resource_owner)
   end
 
   private

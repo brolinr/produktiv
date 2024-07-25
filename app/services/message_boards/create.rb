@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageBoards::Create < ApplicationService
   def call
     preload :project
@@ -25,7 +27,7 @@ class MessageBoards::Create < ApplicationService
       assign_response({ error: result.errors })
     end
   rescue StandardError
-    add_error('Something went wrong')
+    add_error("Something went wrong")
     assign_response({ error: result.errors })
   end
 end

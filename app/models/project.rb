@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
   belongs_to :user, dependent: :destroy
 
@@ -5,6 +7,7 @@ class Project < ApplicationRecord
 
   has_many :project_users, dependent: :destroy
   has_many :messages, through: :project_users
+  has_many :chats, dependent: :destroy
 
   has_one :message_board, dependent: :destroy
 end

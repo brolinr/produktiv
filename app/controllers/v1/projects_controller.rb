@@ -26,7 +26,7 @@ class V1::ProjectsController < V1::ApplicationController
 
   def destroy
     project.destroy
-    head :no_content
+    head(:no_content)
   end
 
   private
@@ -34,7 +34,7 @@ class V1::ProjectsController < V1::ApplicationController
   def project
     @project ||= current_resource_owner.projects.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Record not found' }, status: :not_found
+    render json: { error: "Record not found" }, status: :not_found
   end
 
   def permitted_params

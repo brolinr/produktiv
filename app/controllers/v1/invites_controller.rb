@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::InvitesController < V1::ApplicationController
   before_action :invite, only: %i[show update destroy]
   before_action :project, only: %i[index create]
@@ -26,7 +28,7 @@ class V1::InvitesController < V1::ApplicationController
 
   def destroy
     invite.destroy
-    head :no_content
+    head(:no_content)
   end
 
   private
@@ -41,12 +43,12 @@ class V1::InvitesController < V1::ApplicationController
   def invite
     @invite ||= ProjectUser.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Invite not found' }, status: :not_found
+    render json: { error: "Invite not found" }, status: :not_found
   end
 
   def project
     @project ||= Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Project not found' }, status: :not_found
+    render json: { error: "Project not found" }, status: :not_found
   end
 end

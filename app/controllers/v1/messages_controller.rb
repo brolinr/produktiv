@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::MessagesController < V1::ApplicationController
   before_action :project, only: %i[index create]
   before_action :message, only: %i[show update destroy]
@@ -28,7 +30,7 @@ class V1::MessagesController < V1::ApplicationController
 
   def destroy
     message.destroy
-    head :no_content
+    head(:no_content)
   end
 
   private
@@ -39,16 +41,16 @@ class V1::MessagesController < V1::ApplicationController
   def project
     @project ||= Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Project not found' }, status: :not_found
+    render json: { error: "Project not found" }, status: :not_found
   end
 
   def project_user
-    @project_user ||= current_resource_owner.project_users.find_by(project: project)
+    @project_user ||= current_resource_owner.project_users.accepted.find_by(project: project)
   end
 
   def message
     @message ||= Message.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Message not found' }, status: :not_found
+    render json: { error: "Message not found" }, status: :not_found
   end
 end

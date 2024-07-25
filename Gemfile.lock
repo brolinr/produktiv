@@ -325,6 +325,7 @@ DEPENDENCIES
   rack-cache (~> 1.17)
   rails (~> 7.2.0.beta2)
   rspec-rails (~> 6.1.0)
+  rubocop-performance (~> 1.21)
   rubocop-rails-omakase
   rubocop-rspec (~> 3.0)
   shoulda-matchers (~> 6.2)

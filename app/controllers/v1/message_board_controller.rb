@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::MessageBoardController < V1::ApplicationController
   before_action :project
 
@@ -19,7 +21,7 @@ class V1::MessageBoardController < V1::ApplicationController
   def project
     @project ||= Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Project not found' }, status: :not_found
+    render json: { error: "Project not found" }, status: :not_found
   end
 
   def permitted_params

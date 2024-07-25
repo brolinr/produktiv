@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Invites::Create < ApplicationService
   def call
     preload :project
@@ -32,11 +34,11 @@ class Invites::Create < ApplicationService
       @invites << invite
     else
       add_errors(invite.errors.full_messages)
-      assign_response({ error: 'Something went wrong! Try again' })
+      assign_response({ error: "Something went wrong! Try again" })
     end
 
   rescue StandardError
-    add_error('Something went wrong')
+    add_error("Something went wrong")
     assign_response({ error: result.errors })
   end
 

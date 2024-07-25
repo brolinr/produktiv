@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1Helpers
   def authenticate_with_token(user)
     application = create(:application)

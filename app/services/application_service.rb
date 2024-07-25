@@ -44,7 +44,7 @@ class ApplicationService
   end
 
   def call
-    raise NotImplementedError, '#call method must be implemented'
+    raise NotImplementedError, "#call method must be implemented"
   end
 
   def transaction
@@ -57,9 +57,9 @@ class ApplicationService
   end
 
   def handle_validation_errors(model)
-    return add_error(I18n.t('flash.something_wrong')) if model.changed? && model.valid?
+    return add_error(I18n.t("flash.something_wrong")) if model.changed? && model.valid?
 
-    add_error(model.errors.full_messages).join(' , ')
+    add_error(model.errors.full_messages).join(" , ")
   end
 
   def handle_errors(model_object = nil)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_23_065303) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_24_063334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_23_065303) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chat_members", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.bigint "project_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_chat_members_on_chat_id"
+    t.index ["project_user_id"], name: "index_chat_members_on_project_user_id"
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_chats_on_project_id"
+  end
+
   create_table "message_boards", force: :cascade do |t|
     t.string "title", default: "Message board"
     t.bigint "project_id", null: false
@@ -63,12 +79,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_23_065303) do
   create_table "messages", force: :cascade do |t|
     t.string "title"
     t.bigint "project_user_id", null: false
-    t.bigint "message_board_id", null: false
+    t.string "room_type", null: false
+    t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "draft", default: false
-    t.index ["message_board_id"], name: "index_messages_on_message_board_id"
     t.index ["project_user_id"], name: "index_messages_on_project_user_id"
+    t.index ["room_type", "room_id"], name: "index_messages_on_room"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -154,8 +171,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_23_065303) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chat_members", "chats"
+  add_foreign_key "chat_members", "project_users"
+  add_foreign_key "chats", "projects"
   add_foreign_key "message_boards", "projects"
-  add_foreign_key "messages", "message_boards"
   add_foreign_key "messages", "project_users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,17 +11,17 @@ class User < ApplicationRecord
   validate :password_confirmation_presence
 
   has_many :access_grants,
-    class_name: 'Doorkeeper::AccessGrant',
+    class_name: "Doorkeeper::AccessGrant",
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :access_tokens,
-    class_name: 'Doorkeeper::AccessToken',
+    class_name: "Doorkeeper::AccessToken",
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :project_users,
-    class_name: '::ProjectUser',
+    class_name: "::ProjectUser",
     foreign_key: :user_id,
     dependent: :destroy
 
@@ -33,14 +35,12 @@ class User < ApplicationRecord
 
   private
   def password_confirmation_presence
-    if password.present? && password_confirmation.blank?
+    return unless password.present? && password_confirmation.blank?
       errors.add(:password_confirmation, "can't be blank")
-    end
   end
 
   def unconfirmed_email_update
-    if self.respond_to?(:unconfirmed_email) && self.persisted?
-      errors.add(:base, 'Confirm your account first!')
-    end
+    return unless self.respond_to?(:unconfirmed_email) && self.persisted?
+      errors.add(:base, "Confirm your account first!")
   end
 end

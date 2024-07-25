@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::Create < ApplicationService
   def call
     step(:create_user)
@@ -12,16 +14,15 @@ class Users::Create < ApplicationService
 
     resource.save
     if resource.persisted?
-      if resource.active_for_authentication?
-        assign_data(resource)
+      assign_data(resource)
+if resource.active_for_authentication?
         assign_response({ user: UserSerializer.new(resource).serializable_hash })
-      else
-        assign_data(resource)
+else
         assign_response(
           user: UserSerializer.new(resource).serializable_hash,
           notice: I18n.t("devise.registrations.signed_up_but_#{resource.inactive_message}")
         )
-      end
+end
     else
       add_errors(resource.errors.full_messages)
       assign_response({ error: result.errors })

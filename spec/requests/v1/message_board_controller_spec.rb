@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe V1::MessageBoardController, type: :request do
@@ -32,8 +34,8 @@ RSpec.describe V1::MessageBoardController, type: :request do
 
   describe "PATCH /update" do
     before { message_board }
-    let(:request) {
- patch "/v1/projects/#{project_id}/message_board", headers: headers, params: { message_board: params } }
+    let(:request) do
+ patch "/v1/projects/#{project_id}/message_board", headers: headers, params: { message_board: params } end
 
     context 'with proper auth' do
       let(:project_id) { project.id }

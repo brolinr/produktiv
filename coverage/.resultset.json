@@ -1,8 +1,75 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/brolinr/workspace/projects/produktiv/app/models/chat_member.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/brolinr/workspace/projects/produktiv/spec/models/chat_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          3,
+          null,
+          null
+        ]
+      },
+      "/home/brolinr/workspace/projects/produktiv/app/models/chat.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/brolinr/workspace/projects/produktiv/spec/models/message_board_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          3,
+          null,
+          null
+        ]
+      },
       "/home/brolinr/workspace/projects/produktiv/app/models/message_board.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
@@ -12,6 +79,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/models/message_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -35,6 +104,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/models/message.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -47,6 +118,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/models/project_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -73,11 +146,14 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/models/project.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
           1,
           null,
+          1,
           1,
           1,
           null,
@@ -87,6 +163,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/models/project_user_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -110,6 +188,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/models/project_user.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -125,6 +205,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/models/user_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           null,
@@ -155,6 +237,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/requests/v1/invites_controller_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -301,6 +385,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/controllers/v1/invites_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -357,6 +443,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/controllers/v1/application_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -375,6 +463,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/controllers/application_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -403,6 +493,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/requests/v1/message_board_controller_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -468,6 +560,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/controllers/v1/message_board_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
@@ -500,6 +594,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/requests/v1/messages_controller_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -645,6 +741,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/controllers/v1/messages_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -703,6 +801,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/requests/v1/projects_controller_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -895,6 +995,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/invites/create_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -933,6 +1035,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/invites/create.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1066,6 +1170,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/invites/update_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1104,6 +1210,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/invites/update.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1115,15 +1223,14 @@
           null,
           1,
           1,
-          16,
+          17,
           null,
           null,
           1,
+          4,
           4,
           3,
-          3,
           null,
-          0,
           0,
           0,
           null,
@@ -1137,6 +1244,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/message_boards/create_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1179,6 +1288,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/message_boards/create.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1214,6 +1325,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/message_boards/update_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1251,6 +1364,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/message_boards/update.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           3,
@@ -1282,6 +1397,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/messages/create_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1327,6 +1444,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/messages/create.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1352,6 +1471,14 @@
           null,
           1,
           4,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null,
+          1,
+          4,
           4,
           4,
           null,
@@ -1371,6 +1498,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/messages/update_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1408,6 +1537,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/messages/update.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1439,6 +1570,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/projects/create_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1476,6 +1609,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/projects/create.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1518,6 +1653,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/projects/update_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1555,6 +1692,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/projects/update.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           4,
@@ -1586,6 +1725,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/users/create_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1629,6 +1770,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/users/create.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           3,
@@ -1647,7 +1790,6 @@
           1,
           1,
           null,
-          0,
           0,
           null,
           null,
@@ -1666,6 +1808,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/spec/services/users/update_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -1703,6 +1847,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/services/users/update.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           2,
@@ -1723,12 +1869,11 @@
           null,
           2,
           1,
+          null,
+          0,
+          0,
+          null,
           1,
-          null,
-          0,
-          0,
-          0,
-          null,
           null,
           1,
           1,
@@ -1738,6 +1883,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/serializers/project_user_serializer.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -1767,7 +1914,7 @@
           null,
           null,
           1,
-          23,
+          24,
           null,
           null,
           1,
@@ -1803,6 +1950,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/serializers/message_board_serializer.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -1811,16 +1960,25 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/serializers/message_serializer.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
           1,
           1,
+          7,
+          null,
+          7,
+          null,
+          null,
           null
         ]
       },
       "/home/brolinr/workspace/projects/produktiv/app/serializers/project_serializer.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -1829,6 +1987,8 @@
       },
       "/home/brolinr/workspace/projects/produktiv/app/serializers/user_serializer.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -1836,6 +1996,6 @@
         ]
       }
     },
-    "timestamp": 1721772083
+    "timestamp": 1721892748
   }
 }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Projects::Create < ApplicationService
   def call
     preload :user
@@ -26,13 +28,13 @@ class Projects::Create < ApplicationService
       assign_response({ error: result.errors })
     end
   rescue StandardError
-    add_error('Something went wrong')
+    add_error("Something went wrong")
     assign_response({ error: result.errors })
   end
 
   def create_message_board
     result = MessageBoards::Create.call(context: { project: @project })
 
-    add_errors('Something went wrong!') if result.failure?
+    add_errors("Something went wrong!") if result.failure?
   end
 end
