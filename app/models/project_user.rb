@@ -7,7 +7,9 @@ class ProjectUser < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  has_many :messages, dependent: :destroy
-
+  has_many :messages, dependent: :destroy, as: :sender
+  has_many :chats, through: :chat_members
+  has_many :chat_messages, through: :chats, source: :messages
+  has_many :chat_members, dependent: :destroy
   validates :user_id, uniqueness: { scope: :project_id, message: " already added" }
 end

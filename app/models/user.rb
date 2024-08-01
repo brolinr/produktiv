@@ -25,8 +25,11 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     dependent: :destroy
 
+  has_many :project_users, dependent: :destroy
+  has_many :chat_members, through: :project_users
   has_many :projects, dependent: :destroy
   has_many :messages, through: :project_user
+  has_many :chats, through: :projects
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)

@@ -35,7 +35,7 @@ class V1::MessagesController < V1::ApplicationController
 
   private
   def permitted_params
-    params.require(:message).permit(:title, :content, :draft)
+    params.require(:message).permit(:title, :content, :draft, :room_id, :room_type, :sender_type, :sender_id)
   end
 
   def project

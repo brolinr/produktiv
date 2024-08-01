@@ -34,9 +34,9 @@ Rails.application.routes.draw do
     resources :projects, only: %i[index show update destroy create] do
       resources :message_board, only: %i[index]
       resources :messages, only: %i[index show update destroy create]
-      patch "message_board", to: "message_board#update"
-      put "message_board", to: "message_board#update"
+      match "message_board", to: "message_board#update", via: [:patch, :put]
       resources :invites, only: %i[index show update destroy create], shallow: true
+      resources :chats, only: %i[index show destroy create]
     end
   end
 end

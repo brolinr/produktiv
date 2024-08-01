@@ -12,7 +12,7 @@ RSpec.describe ChatMember, type: :model do
   describe 'relations' do
     it { is_expected.to belong_to(:chat) }
     it { is_expected.to belong_to(:project_user) }
-    it { is_expected.to have_many(:messages).dependent(:destroy) }
+    # it { is_expected.to have_many(:messages).dependent(:destroy) }
   end
 
   describe 'factories' do

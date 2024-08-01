@@ -10,7 +10,7 @@ RSpec.describe Message, type: :model do
 
   describe 'relations' do
     it { is_expected.to belong_to(:room) }
-    it { is_expected.to belong_to(:project_user) }
+    it { is_expected.to belong_to(:sender) }
   end
 
   describe 'factories' do

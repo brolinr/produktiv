@@ -78,14 +78,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_24_063334) do
 
   create_table "messages", force: :cascade do |t|
     t.string "title"
-    t.bigint "project_user_id", null: false
+    t.string "sender_type", null: false
+    t.bigint "sender_id", null: false
     t.string "room_type", null: false
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "draft", default: false
-    t.index ["project_user_id"], name: "index_messages_on_project_user_id"
     t.index ["room_type", "room_id"], name: "index_messages_on_room"
+    t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -175,7 +176,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_24_063334) do
   add_foreign_key "chat_members", "project_users"
   add_foreign_key "chats", "projects"
   add_foreign_key "message_boards", "projects"
-  add_foreign_key "messages", "project_users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "project_users", "projects"

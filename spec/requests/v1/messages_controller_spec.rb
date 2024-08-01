@@ -8,7 +8,7 @@ RSpec.describe V1::MessagesController, type: :request do
   let(:headers) { authenticate_with_token(project.user) }
   let(:message_board) { create(:message_board, project: project) }
   let(:project_user) { create(:project_user, project: project, user: user, invite_status: 'accepted') }
-  let(:message) { create(:message, room: message_board, project_user: project_user) }
+  let(:message) { create(:message, room: message_board, sender: project_user) }
 
   before { user }
   describe "GET #index" do
@@ -68,7 +68,9 @@ RSpec.describe V1::MessagesController, type: :request do
         headers: headers, params: { message: params }
     end
     context 'with proper auth' do
-      let(:params) { attributes_for(:message, project_user: nil, message_board: nil) }
+      let(:params) do
+        attributes_for(:message, sender: nil, room: nil, sender_type: 'ProjectUser', room_type: 'MessageBoard')
+      end
 
       it 'creates message', :aggregate_failures do
         expect { request }.to change(Message, :count).by(1)
@@ -84,6 +86,28 @@ RSpec.describe V1::MessagesController, type: :request do
         expect { request }.not_to change(Message, :count)
         expect(response.status).to eq(422)
         expect(ActiveSupport::JSON.decode(response.body)['error']).not_to be_empty
+      end
+    end
+
+    context 'with params for a chat' do
+      let(:chat) { create(:chat, project: project) }
+      let(:chat_member) { create(:chat_member, chat: chat, project_user: project_user) }
+      let(:params) do
+        attributes_for(
+          :message,
+          sender: nil,
+          room: nil,
+          sender_type: 'ChatMember',
+          room_type: 'Chat',
+          room_id: chat.id,
+          sender_id: chat_member.id
+        )
+      end
+      it 'creates new message for chat', :aggregate_failures do
+        expect { request }.to change(Message, :count).by(1)
+        expect(chat.messages.count).to eq(1)
+        expect(response.status).to eq(200)
+        expect(ActiveSupport::JSON.decode(response.body)['data']['id']).to eq(Message.last.id.to_s)
       end
     end
   end
