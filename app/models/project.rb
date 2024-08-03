@@ -10,4 +10,5 @@ class Project < ApplicationRecord
   has_many :chats, dependent: :destroy
 
   has_one :message_board, dependent: :destroy
+  has_one :todo, dependent: :destroy
 end

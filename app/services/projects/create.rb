@@ -7,6 +7,7 @@ class Projects::Create < ApplicationService
     transaction do
       step :create_project
       step :create_message_board
+      step :create_todo
     end
 
     result
@@ -34,6 +35,12 @@ class Projects::Create < ApplicationService
 
   def create_message_board
     result = MessageBoards::Create.call(context: { project: @project })
+
+    add_errors("Something went wrong!") if result.failure?
+  end
+
+  def create_todo
+    result = Todos::Create.call(context: { project: @project })
 
     add_errors("Something went wrong!") if result.failure?
   end
