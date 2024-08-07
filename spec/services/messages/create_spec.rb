@@ -15,6 +15,9 @@ RSpec.describe Messages::Create do
   let(:message_board) { create(:message_board, project: project) }
   let(:chat) { create(:chat, project: project) }
   let(:chat_member) { create(:chat_member, chat: chat, project_user: project_user) }
+  let(:todo) { create(:todo, project: project) }
+  let(:todo_list) { create(:todo_list, todo: todo) }
+  let(:todo_item) { create(:todo_item, todo_list: todo_list, project_user: project_user) }
 
   describe '#call' do
     context 'when using valid for messageboard params' do
@@ -60,6 +63,32 @@ RSpec.describe Messages::Create do
           sender_type: 'ChatMember',
           room_type: 'Chat',
           room_id: chat.id
+        )
+      end
+
+      it 'should create message', :aggregate_failures do
+        expect { call }.to change(Message, :count).by(1)
+        expect(call).to be_success
+        expect(call.data).to be_a(Message)
+        expect(call.response).to be_a(Hash)
+      end
+    end
+
+    context 'with valid params for commenting on task' do
+      before do
+        project_user
+        todo_item
+      end
+
+      let(:params) do
+        attributes_for(
+          :message,
+          room: nil,
+          sender: nil,
+          sender_id: project_user.id,
+          sender_type: 'ProjectUser',
+          room_type: 'TodoItem',
+          room_id: todo_item.id
         )
       end
 

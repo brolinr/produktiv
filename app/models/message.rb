@@ -6,5 +6,5 @@ class Message < ApplicationRecord
 
   has_rich_text :content
 
-  validates :content, :title, presence: true
+  validates :content, presence: true
 end

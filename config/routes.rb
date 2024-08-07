@@ -36,7 +36,9 @@ Rails.application.routes.draw do
       match "todo", to: "todo#update", via: [:patch, :put]
       resources :message_board, only: %i[index]
       resources :todo, only: %i[index]
-      resources :todo_lists, only: %i[index show update destroy create]
+      resources :todo_lists, only: %i[index show update destroy create] do
+        resources :todo_items, only: %i[index show update destroy create]
+      end
       resources :messages, only: %i[index show update destroy create]
       resources :invites, only: %i[index show update destroy create], shallow: true
       resources :chats, only: %i[index show destroy create]

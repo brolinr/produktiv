@@ -19,10 +19,14 @@ class Messages::Create < ApplicationService
     @user ||= context[:user]
   end
 
+  def project_user
+    ProjectUser.accepted.find_by(user: user, project: project)
+  end
+
   def sender
     @sender ||= case params[:sender_type]
     when "ProjectUser"
-      user.project_users.accepted.find_by(project: project)
+      project_user
     when "ChatMember"
       user.chat_members.find_by(id: params[:sender_id])
     end
@@ -34,6 +38,8 @@ class Messages::Create < ApplicationService
       project.chats.find_by(id: params[:room_id])
     when "MessageBoard"
       project.message_board
+    when "TodoItem", "Task"
+      Task.find_by(id: params[:room_id])
     else
       add_error("Room not found")
     end

@@ -50,14 +50,14 @@ RSpec.describe V1::TodoListsController, type: :request do
       let(:id) { todo_list.id }
       let(:headers) { authenticate_with_token(user) }
 
-      it 'should return project', :aggregate_failures do
+      it 'should return todo list', :aggregate_failures do
         request
         expect(response.status).to eq(200)
         expect(ActiveSupport::JSON.decode(response.body)['data']['id']).to eq("#{todo_list.id}")
       end
     end
 
-    context 'with non existing project' do
+    context 'with non existing todo list' do
       let(:id) { 'todo_list' }
       let(:headers) { authenticate_with_token(user) }
 
@@ -87,7 +87,7 @@ RSpec.describe V1::TodoListsController, type: :request do
       it 'creates todo_list', :aggregate_failures do
         expect { request }.to change(TodoList, :count).by(1)
         expect(response.status).to eq(200)
-        expect(ActiveSupport::JSON.decode(response.body)['data'].count).to eq(3)
+        expect(ActiveSupport::JSON.decode(response.body)['data'].count).to eq(4)
       end
     end
 

@@ -10,7 +10,7 @@ RSpec.describe TodoList, type: :model do
 
   describe 'relations' do
     it { is_expected.to belong_to(:todo) }
-    # it { is_expected.to have_many(:todo_items).dependent(:destroy) }
+    it { is_expected.to have_many(:todo_items).dependent(:destroy) }
   end
 
   describe 'factories' do

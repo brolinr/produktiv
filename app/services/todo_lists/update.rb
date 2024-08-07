@@ -2,7 +2,7 @@
 
 class TodoLists::Update < ApplicationService
   def call
-    preload(:project, :todo_list)
+    preload(:todo_list)
 
     step(:update_todo_list)
 
@@ -10,13 +10,8 @@ class TodoLists::Update < ApplicationService
   end
 
   private
-
-  def project
-    @project ||= context[:project]
-  end
-
   def todo_list
-    @todo_list ||= context[:todo_list] || project.todo_list
+    @todo_list ||= context[:todo_list]
   end
 
   def update_todo_list

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_02_064357) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_06_085541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_02_064357) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "assignees", force: :cascade do |t|
+    t.bigint "project_user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_user_id"], name: "index_assignees_on_project_user_id"
+    t.index ["task_id"], name: "index_assignees_on_task_id"
   end
 
   create_table "chat_members", force: :cascade do |t|
@@ -155,6 +164,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_02_064357) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.jsonb "additional_fields"
+    t.boolean "completed"
+    t.datetime "deadline"
+    t.datetime "completed_at"
+    t.string "list_type", null: false
+    t.bigint "list_id", null: false
+    t.bigint "project_user_id", null: false
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_type", "list_id"], name: "index_tasks_on_list"
+    t.index ["project_user_id"], name: "index_tasks_on_project_user_id"
+  end
+
   create_table "todo_lists", force: :cascade do |t|
     t.string "title"
     t.bigint "todo_id", null: false
@@ -188,6 +213,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_02_064357) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assignees", "project_users"
+  add_foreign_key "assignees", "tasks"
   add_foreign_key "chat_members", "chats"
   add_foreign_key "chat_members", "project_users"
   add_foreign_key "chats", "projects"
@@ -197,6 +224,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_02_064357) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "project_users"
   add_foreign_key "todo_lists", "todos"
   add_foreign_key "todos", "projects"
 end

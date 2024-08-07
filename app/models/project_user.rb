@@ -11,5 +11,8 @@ class ProjectUser < ApplicationRecord
   has_many :chats, through: :chat_members
   has_many :chat_messages, through: :chats, source: :messages
   has_many :chat_members, dependent: :destroy
+  has_many :todo_items, dependent: :destroy
+  has_many :assignees, dependent: :destroy
+
   validates :user_id, uniqueness: { scope: :project_id, message: " already added" }
 end
