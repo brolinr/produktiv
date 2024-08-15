@@ -36,6 +36,6 @@ gem "doorkeeper",                 "~> 5.7"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "ffaker",                     "~> 2.23"
-gem "image_processing",           "~> 1.2"
+gem "image_processing",           "~> 1.13"
 
 gem "rubocop-performance", "~> 1.21"
