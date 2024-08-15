@@ -13,7 +13,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "shoulda-matchers", "~> 6.2"
+  gem "shoulda-matchers", "~> 6.3"
   gem "simplecov",        "~> 0.22.0"
 end
 
