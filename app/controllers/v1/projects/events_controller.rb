@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class V1::EventsController < V1::ApplicationController
-  before_action :project
+class V1::Projects::EventsController < V1::Projects::ApplicationController
   before_action :event, only: %i[show update destroy]
 
   def index
-    events = EventSerializer.new(project.events).serializable_hash
+    events = EventSerializer.new(current_project.events).serializable_hash
+
     render json: events, status: :ok
   end
 
@@ -15,7 +15,7 @@ class V1::EventsController < V1::ApplicationController
 
   def create
     result = Events::Create.call(
-      context: { user: current_resource_owner, project: project },
+      context: { project_user: current_project_user, project: current_project },
       params: permitted_params
     )
 
@@ -35,12 +35,8 @@ class V1::EventsController < V1::ApplicationController
 
   private
 
-  def project
-    @project ||= Project.find_by(id: params[:project_id])
-  end
-
   def event
-    @event ||= project.events.find(params[:id])
+    @event ||= current_project.events.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Event not found" }, status: :not_found
   end

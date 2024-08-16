@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class V1::TodoItemsController < V1::ApplicationController
-  before_action :project_user
-  before_action :project
+class V1::Projects::TodoItemsController < V1::Projects::ApplicationController
   before_action :todo_list
   before_action :todo_item, only: %i[show update destroy]
 
@@ -17,7 +15,7 @@ class V1::TodoItemsController < V1::ApplicationController
 
   def create
     result = TodoItems::Create.call(
-      context: { todo_list: todo_list, project_user: project_user },
+      context: { todo_list: todo_list, project_user: current_project_user },
       params: permitted_params
     )
 
@@ -37,18 +35,8 @@ class V1::TodoItemsController < V1::ApplicationController
 
   private
 
-  def project_user
-    @project_user = current_resource_owner.project_users.find_by!(project_id: params[:project_id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: "User is not authorized in this project" }, status: :not_authorized
-  end
-
-  def project
-    @project ||= project_user.project
-  end
-
   def todo_list
-    @todo_list ||= project.todo_lists.find(params[:todo_list_id])
+    @todo_list ||= current_project.todo_lists.find(params[:todo_list_id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Todo list not found" }, status: :not_found
   end

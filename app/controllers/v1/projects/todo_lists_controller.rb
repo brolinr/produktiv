@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-class V1::TodoListsController < V1::ApplicationController
-  before_action :project
+class V1::Projects::TodoListsController < V1::Projects::ApplicationController
   before_action :todo_list, only: %i[show update destroy]
 
   def index
-    todo_lists = TodoListSerializer.new(project.todo.todo_lists).serializable_hash
+    todo_lists = TodoListSerializer.new(current_project.todo_lists).serializable_hash
     render json: todo_lists, status: :ok
   end
 
@@ -14,7 +13,14 @@ class V1::TodoListsController < V1::ApplicationController
   end
 
   def create
-    result = TodoLists::Create.call(context: { project: project }, params: permitted_params)
+    result = TodoLists::Create.call(
+      context: {
+        project: current_project,
+        project_user: current_project_user
+      },
+      params: permitted_params
+    )
+
     render json: result.response, status: result.status
   end
 
@@ -32,15 +38,9 @@ class V1::TodoListsController < V1::ApplicationController
   private
 
   def todo_list
-    @todo_list ||= project.todo.todo_lists.find(params[:id])
+    @todo_list ||= current_project.todo.todo_lists.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Todo list not found" }, status: :not_found
-  end
-
-  def project
-    @project ||= current_resource_owner.project_users.find_by!(project_id: params[:project_id]).project
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: "Project not found" }, status: :not_found
   end
 
   def permitted_params

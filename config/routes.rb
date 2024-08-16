@@ -32,17 +32,21 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :projects, only: %i[index show update destroy create] do
-      match "message_board", to: "message_board#update", via: [:patch, :put]
-      match "todo", to: "todo#update", via: [:patch, :put]
-      resources :message_board, only: %i[index]
-      resources :todo, only: %i[index]
-      resources :todo_lists, only: %i[index show update destroy create] do
-        resources :todo_items, only: %i[index show update destroy create]
+      scope module: 'projects' do
+        match "message_board", to: "message_board#update", via: [:patch, :put]
+        resources :message_board, only: %i[index]
+        resources :messages, only: %i[index show update destroy create]
+        match "todo", to: "todo#update", via: [:patch, :put]
+        resources :todo, only: %i[index]
+        resources :todo_lists, only: %i[index show update destroy create] do
+          resources :todo_items, only: %i[index show update destroy create]
+        end
+
+        resources :chats, only: %i[index show destroy create]
+        resources :events, only: %i[index show update destroy create]
       end
-      resources :events, only: %i[index show update destroy create]
-      resources :messages, only: %i[index show update destroy create]
+  
       resources :invites, only: %i[index show update destroy create], shallow: true
-      resources :chats, only: %i[index show destroy create]
     end
   end
 end

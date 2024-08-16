@@ -2,12 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::MessageBoardController, type: :request do
+RSpec.describe V1::Projects::MessageBoardController, type: :request do
   let(:project) { create(:project) }
+  let(:project_user) { create(:project_user, project: project, user: project.user, invite_status: 'accepted') }
   let(:message_board) { create(:message_board, project: project) }
   let(:headers) { authenticate_with_token(project.user) }
 
-  describe "GET /show" do
+  before { project_user }
+
+  describe "GET #index" do
     before { message_board }
     let(:request) { get "/v1/projects/#{project_id}/message_board", headers: headers }
 
@@ -32,7 +35,7 @@ RSpec.describe V1::MessageBoardController, type: :request do
     end
   end
 
-  describe "PATCH /update" do
+  describe "PATCH #update" do
     before { message_board }
     let(:request) do
  patch "/v1/projects/#{project_id}/message_board", headers: headers, params: { message_board: params } end

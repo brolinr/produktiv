@@ -6,7 +6,7 @@ RSpec.describe Events::Create do
   subject(:call) do
     described_class.call(
       params: ActionController::Parameters.new(params).permit!,
-      context: { user: user, project: project }
+      context: { project_user: project_user, project: project }
     )
   end
 

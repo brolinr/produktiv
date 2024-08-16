@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::MessagesController, type: :request do
+RSpec.describe V1::Projects::MessagesController, type: :request do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
   let(:headers) { authenticate_with_token(project.user) }

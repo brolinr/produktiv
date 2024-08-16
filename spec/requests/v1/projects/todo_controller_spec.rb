@@ -2,12 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::TodoController, type: :request do
+RSpec.describe V1::Projects::TodoController, type: :request do
   let(:project) { create(:project) }
   let(:todo) { create(:todo, project: project) }
   let(:headers) { authenticate_with_token(project.user) }
 
-  describe "GET /show" do
+  before { create(:project_user, project: project, user: project.user, invite_status: 'accepted') }
+
+  describe "GET #index" do
     before { todo }
     let(:request) { get "/v1/projects/#{project_id}/todo", headers: headers }
 
@@ -32,7 +34,7 @@ RSpec.describe V1::TodoController, type: :request do
     end
   end
 
-  describe "PATCH /update" do
+  describe "PATCH #update" do
     before { todo }
     let(:request) do
  patch "/v1/projects/#{project_id}/todo", headers: headers, params: { todo: params } end

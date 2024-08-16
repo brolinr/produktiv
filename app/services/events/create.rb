@@ -2,7 +2,7 @@
 
 class Events::Create < ApplicationService
   def call
-    preload(:user, :project, :project_user)
+    preload(:project, :project_user)
 
     transaction do
       step(:create_event)
@@ -14,9 +14,6 @@ class Events::Create < ApplicationService
 
   private
 
-  def user
-    @user ||= context[:user]
-  end
 
 
   def project
@@ -24,7 +21,7 @@ class Events::Create < ApplicationService
   end
 
   def project_user
-    @project_user ||= project.project_users.accepted.find_by(user_id: user.id)
+    @project_user ||= context[:project_user]
   end
 
   def create_event

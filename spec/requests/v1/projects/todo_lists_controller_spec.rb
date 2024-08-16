@@ -2,14 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::TodoListsController, type: :request do
+RSpec.describe V1::Projects::TodoListsController, type: :request do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
   let(:todo) { create(:todo, project: project) }
   let(:todo_list) { create(:todo_list, todo: todo) }
-  let(:project_user) { create(:project_user, project: project, user: user) }
+  let(:project_user) { create(:project_user, project: project, user: user, invite_status: 'accepted') }
 
-  before { user }
+  before { project_user }
+
   describe "GET #index" do
     before do
       project_user

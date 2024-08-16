@@ -6,11 +6,12 @@ RSpec.describe TodoLists::Create do
   subject(:call) do
     described_class.call(
       params: ActionController::Parameters.new(params).permit!,
-      context: { project: project }
+      context: { project: project, project_user: project_user }
     )
   end
   let(:user) { create(:user) }
   let(:project) { create(:project) }
+  let(:project_user) { create(:project_user, project: project, user: user, invite_status: 'accepted') }
   let(:todo) { create(:todo, project: project) }
 
   describe '#call' do

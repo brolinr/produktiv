@@ -2,7 +2,7 @@
 
 class TodoLists::Create < ApplicationService
   def call
-    preload(:project, :todo)
+    preload(:project, :project_user, :todo)
 
     step(:create_todo_list)
     # step(:add_todo_items)
@@ -16,12 +16,16 @@ class TodoLists::Create < ApplicationService
     @project = context[:project]
   end
 
+  def project_user
+    @project_user ||= context[:project_user]
+  end
+
   def todo
     @todo = context[:todo] || project.todo
   end
 
   def create_todo_list
-    todo_list = TodoList.new(params)
+    todo_list = project_user.todo_lists.new(params)
     todo_list.todo = todo
 
     if todo_list.save

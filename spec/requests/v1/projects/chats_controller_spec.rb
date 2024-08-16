@@ -2,13 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::ChatsController, type: :request do
+RSpec.describe V1::Projects::ChatsController, type: :request do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
-  let(:project_user) { create(:project_user, project: project, user: user) }
+  let(:project_user) { create(:project_user, project: project, user: user, invite_status: 'accepted') }
   let(:chat) { create(:chat, project: project) }
   let(:chat_member) { create(:chat_member, chat: chat, project_user: project_user) }
   let(:header) { authenticate_with_token(user) }
+
+  before { project_user }
 
   describe "GET #index" do
     before { chat_member }
@@ -73,7 +75,7 @@ RSpec.describe V1::ChatsController, type: :request do
   end
 
   describe "DELETE #delete" do
-    before { chat }
+    before { chat_member }
     let(:request) { delete "/v1/projects/#{project_id}/chats/#{id}", headers: header }
 
     context 'with proper auth' do

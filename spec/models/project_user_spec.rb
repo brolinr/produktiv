@@ -12,6 +12,7 @@ RSpec.describe ProjectUser, type: :model do
   describe 'relations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:project) }
+    it { is_expected.to have_many(:todo_lists).dependent(:destroy) }
     it { is_expected.to have_many(:todo_items).dependent(:destroy) }
     it { is_expected.to have_many(:assignees).dependent(:destroy) }
   end

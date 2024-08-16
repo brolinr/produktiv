@@ -2,7 +2,7 @@
 
 class Messages::Create < ApplicationService
   def call
-    preload :project, :user, :sender
+    preload :project, :project_user, :sender
 
     step :create_message
 
@@ -15,12 +15,8 @@ class Messages::Create < ApplicationService
     @project ||= context[:project]
   end
 
-  def user
-    @user ||= context[:user]
-  end
-
   def project_user
-    ProjectUser.accepted.find_by(user: user, project: project)
+    @project_user ||= context[:project_user]
   end
 
   def sender
@@ -28,7 +24,7 @@ class Messages::Create < ApplicationService
     when "ProjectUser"
       project_user
     when "ChatMember"
-      user.chat_members.find_by(id: params[:sender_id])
+      project_user.chat_members.find_by(id: params[:sender_id])
     end
   end
 

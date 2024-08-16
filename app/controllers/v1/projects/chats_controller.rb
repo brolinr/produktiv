@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class V1::ChatsController < V1::ApplicationController
-  before_action :project
+class V1::Projects::ChatsController < V1::Projects::ApplicationController
   before_action :chat, only: %i[show destroy]
+
   def index
-    chats = current_resource_owner.chats.where(project: project)
+    chats = current_project_user.chats.where(project: current_project)
     render json: ChatSerializer.new(chats).serializable_hash, status: :found
   end
 
@@ -13,7 +13,8 @@ class V1::ChatsController < V1::ApplicationController
   end
 
   def create
-    result = Chats::Create.call(params: permitted_params, context: { project: project })
+    result = Chats::Create.call(params: permitted_params, context: { project: current_project })
+
     render json: result.response, status: result.status
   end
 
@@ -24,14 +25,8 @@ class V1::ChatsController < V1::ApplicationController
 
   private
 
-  def project
-   @project ||= Project.find(params[:project_id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: "Project not found" }, status: :not_found
-  end
-
   def chat
-    @chat ||= current_resource_owner.chats.where(project: project).find(params[:id])
+    @chat ||= current_project_user.chats.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Chat not found" }, status: :not_found
   end
