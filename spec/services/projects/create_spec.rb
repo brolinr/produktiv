@@ -14,9 +14,9 @@ RSpec.describe Projects::Create do
   describe '#call' do
     context 'when using valid params' do
       let(:params) { attributes_for(:project, user: nil) }
-      it 'should create project', :aggregate_failures do
+      it 'should create project, todo, event schduler', :aggregate_failures do
         expect { call }.to change(Project, :count).by(1).and(change(MessageBoard, :count).by(1))
-          .and(change(Todo, :count).by(1))
+          .and(change(Todo, :count).by(1)).and(change(EventScheduler, :count).by(1))
         expect(call).to be_success
         expect(call.data).to be_a(Project)
         expect(call.response).to be_a(Hash)

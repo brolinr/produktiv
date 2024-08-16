@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_06_085541) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_13_114937) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,35 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_06_085541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_chats_on_project_id"
+  end
+
+  create_table "event_participants", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "project_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_participants_on_event_id"
+    t.index ["project_user_id"], name: "index_event_participants_on_project_user_id"
+  end
+
+  create_table "event_schedulers", force: :cascade do |t|
+    t.string "title", default: "Event Scheduler"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_event_schedulers_on_project_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.bigint "event_scheduler_id", null: false
+    t.bigint "project_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_scheduler_id"], name: "index_events_on_event_scheduler_id"
+    t.index ["project_user_id"], name: "index_events_on_project_user_id"
   end
 
   create_table "message_boards", force: :cascade do |t|
@@ -218,6 +247,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_06_085541) do
   add_foreign_key "chat_members", "chats"
   add_foreign_key "chat_members", "project_users"
   add_foreign_key "chats", "projects"
+  add_foreign_key "event_participants", "events"
+  add_foreign_key "event_participants", "project_users"
+  add_foreign_key "event_schedulers", "projects"
+  add_foreign_key "events", "event_schedulers"
+  add_foreign_key "events", "project_users"
   add_foreign_key "message_boards", "projects"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

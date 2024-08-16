@@ -8,6 +8,7 @@ class Projects::Create < ApplicationService
       step :create_project
       step :create_message_board
       step :create_todo
+      step :create_event_scheduler
     end
 
     result
@@ -43,5 +44,9 @@ class Projects::Create < ApplicationService
     result = Todos::Create.call(context: { project: @project })
 
     add_errors("Something went wrong!") if result.failure?
+  end
+
+  def create_event_scheduler
+    add_errors("Something went wrong!") unless EventScheduler.create(project: @project)
   end
 end

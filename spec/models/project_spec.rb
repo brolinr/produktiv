@@ -14,6 +14,7 @@ RSpec.describe Project, type: :model do
     it { is_expected.to have_many(:project_users).dependent(:destroy) }
     it { is_expected.to have_one(:message_board).dependent(:destroy) }
     it { is_expected.to have_one(:todo).dependent(:destroy) }
+    it { is_expected.to have_one(:event_scheduler).dependent(:destroy) }
     # it { is_expected.to have_many(:messages).through(:project_users) }
   end
 

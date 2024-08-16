@@ -42,6 +42,7 @@ class TodoItems::Update < ApplicationService
       next if Assignee.create(task: todo_item, project_user_id: project_user_id)
 
       add_error("Something went wrong while adding assignees")
+      assign_response({ error: result.errors })
     end
   end
 end

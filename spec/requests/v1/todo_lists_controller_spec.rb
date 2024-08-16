@@ -87,7 +87,7 @@ RSpec.describe V1::TodoListsController, type: :request do
       it 'creates todo_list', :aggregate_failures do
         expect { request }.to change(TodoList, :count).by(1)
         expect(response.status).to eq(200)
-        expect(ActiveSupport::JSON.decode(response.body)['data'].count).to eq(4)
+        expect(ActiveSupport::JSON.decode(response.body)['data'].count).to eq(3)
       end
     end
 

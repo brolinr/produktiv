@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :todo_lists, only: %i[index show update destroy create] do
         resources :todo_items, only: %i[index show update destroy create]
       end
+      resources :events, only: %i[index show update destroy create]
       resources :messages, only: %i[index show update destroy create]
       resources :invites, only: %i[index show update destroy create], shallow: true
       resources :chats, only: %i[index show destroy create]

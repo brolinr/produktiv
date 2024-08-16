@@ -13,6 +13,8 @@ class ProjectUser < ApplicationRecord
   has_many :chat_members, dependent: :destroy
   has_many :todo_items, dependent: :destroy
   has_many :assignees, dependent: :destroy
+  has_many :events, dependent: :destroy
+  has_many :event_participants, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :project_id, message: " already added" }
 end
