@@ -25,7 +25,7 @@ end
 # es not include zoneinfo files, so bundle the tzinfo-data gem
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 
-gem "rails",                      "~> 7.2.0.beta2"
+gem "rails",                      "~> 7.2.1"
 gem "pg",                         "~> 1.1"
 gem "puma",                       ">= 5.0"
 gem "rack-cache",                 "~> 1.17"
