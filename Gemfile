@@ -26,7 +26,7 @@ end
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 
 gem "rails",                      "~> 7.2.0.beta2"
-gem "pg",                         "~> 1.1"
+gem "pg",                         "~> 1.5"
 gem "puma",                       ">= 5.0"
 gem "rack-cache",                 "~> 1.17"
 gem "ializer",                    "~> 0.14.0"
