@@ -38,4 +38,4 @@ gem "bootsnap", require: false
 gem "ffaker",                     "~> 2.23"
 gem "image_processing",           "~> 1.2"
 
-gem "rubocop-performance", "~> 1.21"
+gem "rubocop-performance", "~> 1.22"
